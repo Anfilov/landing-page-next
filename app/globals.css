@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   padding: 16px 40px;
   background: #D6BD68;
-  color: #fff;
+  color: #1A1A1A !important;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;

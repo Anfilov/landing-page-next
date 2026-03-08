@@ -117,7 +117,7 @@ export default async function Home() {
           </p>
 
           <div className="animate-fade-up delay-5 mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a href="#sluzby" className="btn-primary">
+            <a href="#sluzby" className="btn-primary" style={{ color: "#1A1A1A" }}>
               Zobrazit služby
             </a>
             <a href="#kontakt" className="btn-ghost-dark">
@@ -348,7 +348,7 @@ export default async function Home() {
               Ozvěte se. Probereme, co potřebujete, a navrhneme řešení.
             </p>
             <div className="mt-12">
-              <a href="mailto:info@anfilov.cz" className="btn-primary text-[15px]">
+              <a href="mailto:info@anfilov.cz" className="btn-primary text-[15px]" style={{ color: "#1A1A1A" }}>
                 Napište nám
               </a>
             </div>
