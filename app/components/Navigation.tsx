@@ -37,6 +37,7 @@ export default function Navigation() {
             alt="ANFILOV"
             width={140}
             height={36}
+            unoptimized
             className="h-7 w-auto"
             priority
           />

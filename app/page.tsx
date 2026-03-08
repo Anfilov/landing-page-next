@@ -368,6 +368,7 @@ export default async function Home() {
                   alt="ANFILOV"
                   width={36}
                   height={36}
+                  unoptimized
                   className="h-9 w-9 transition-transform duration-500 hover:rotate-6"
                 />
                 <p className="mt-4 text-[14px] leading-[1.5] text-white/30">
