@@ -27,17 +27,9 @@
 
   --anf-white: #FFFFFF;
   --anf-black: #1A1A1A;
-
-  --background: #F0F0F0;
-  --foreground: #333333;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
-
   --color-gold-50:  #FBF8EF;
   --color-gold-100: #F5EDCF;
   --color-gold-200: #EBDBA0;
@@ -59,6 +51,9 @@
   --color-neutral-700: #404040;
   --color-neutral-800: #333333;
   --color-neutral-900: #1A1A1A;
+
+  --font-sans: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 }
 
 /* ── Base ─────────────────────────────────── */
@@ -69,9 +64,11 @@ html {
 
 body {
   background: var(--anf-neutral-900);
-  color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--anf-neutral-800);
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -407,6 +404,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   width: max-content;
   animation: marqueeScroll linear infinite;
+  will-change: transform;
 }
 
 .marquee-reverse {
@@ -433,12 +431,13 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
   background: #D6BD68;
   opacity: 0.3;
+  flex-shrink: 0;
 }
 
 /* ── Stat counter large ──────────────────── */
 
 .stat-value-large {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: clamp(40px, 6vw, 64px);
   font-weight: 600;
   line-height: 1;
@@ -502,7 +501,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Number markers ──────────────────────── */
 
 .number-marker {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.5;
   color: #D6BD68;
@@ -550,7 +549,6 @@ h1, h2, h3, h4, h5, h6 {
 .geo-shape {
   position: absolute;
   border: 1px solid rgba(214, 189, 104, 0.15);
-  animation: geoFloat 12s ease-in-out infinite;
 }
 
 .geo-shape-1 {
@@ -560,7 +558,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(214, 189, 104, 0.06), transparent);
-  animation-delay: 0s;
+  animation: geoFloat1 12s ease-in-out infinite;
+}
+
+@keyframes geoFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(15px, -20px); }
+  50% { transform: translate(-10px, -35px); }
+  75% { transform: translate(20px, -15px); }
 }
 
 .geo-shape-2 {
@@ -568,10 +573,16 @@ h1, h2, h3, h4, h5, h6 {
   right: 15%;
   width: 60px;
   height: 60px;
-  transform: rotate(45deg);
   background: linear-gradient(135deg, rgba(214, 189, 104, 0.04), transparent);
+  animation: geoFloat2 15s ease-in-out infinite;
   animation-delay: -3s;
-  animation-duration: 15s;
+}
+
+@keyframes geoFloat2 {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  25% { transform: rotate(50deg) translate(10px, -15px); }
+  50% { transform: rotate(42deg) translate(-15px, -25px); }
+  75% { transform: rotate(48deg) translate(12px, -10px); }
 }
 
 .geo-shape-3 {
@@ -581,8 +592,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 100px;
   border-radius: 50%;
   border: 1px solid rgba(214, 189, 104, 0.1);
+  animation: geoFloat3 18s ease-in-out infinite;
   animation-delay: -6s;
-  animation-duration: 18s;
+}
+
+@keyframes geoFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -25px) scale(1.05); }
+  66% { transform: translate(-15px, -40px) scale(0.95); }
 }
 
 .geo-shape-4 {
@@ -591,28 +608,16 @@ h1, h2, h3, h4, h5, h6 {
   width: 40px;
   height: 40px;
   border-radius: 2px;
-  transform: rotate(30deg);
   background: rgba(214, 189, 104, 0.05);
+  animation: geoFloat4 14s ease-in-out infinite;
   animation-delay: -9s;
-  animation-duration: 14s;
 }
 
-@keyframes geoFloat {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(15px, -20px) rotate(5deg); }
-  50% { transform: translate(-10px, -35px) rotate(-3deg); }
-  75% { transform: translate(20px, -15px) rotate(4deg); }
-}
-
-.geo-shape-2 {
-  animation-name: geoFloat2;
-}
-
-@keyframes geoFloat2 {
-  0%, 100% { transform: rotate(45deg) translate(0, 0); }
-  25% { transform: rotate(50deg) translate(10px, -15px); }
-  50% { transform: rotate(42deg) translate(-15px, -25px); }
-  75% { transform: rotate(48deg) translate(12px, -10px); }
+@keyframes geoFloat4 {
+  0%, 100% { transform: rotate(30deg) translate(0, 0); }
+  25% { transform: rotate(35deg) translate(-10px, -20px); }
+  50% { transform: rotate(25deg) translate(15px, -30px); }
+  75% { transform: rotate(32deg) translate(5px, -10px); }
 }
 
 /* ── Emblem ring ─────────────────────────── */
@@ -704,4 +709,11 @@ h1, h2, h3, h4, h5, h6 {
 .footer-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+/* ── Mobile menu transition ──────────────── */
+
+.mobile-menu-transition {
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }

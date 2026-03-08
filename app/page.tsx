@@ -364,11 +364,11 @@ export default async function Home() {
               {/* Logo */}
               <div className="md:col-span-4">
                 <Image
-                  src="/ANFILOV-Symbol.svg"
+                  src="/ANFILOV-Symbol-White.svg"
                   alt="ANFILOV"
                   width={36}
                   height={36}
-                  className="h-9 w-9 brightness-0 invert transition-transform duration-500 hover:rotate-6"
+                  className="h-9 w-9 transition-transform duration-500 hover:rotate-6"
                 />
                 <p className="mt-4 text-[14px] leading-[1.5] text-white/30">
                   Od strategie po design.

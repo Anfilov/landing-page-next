@@ -23,7 +23,7 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? "nav-scrolled border-b border-neutral-200/40 bg-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] backdrop-blur-2xl"
+          ? "border-b border-neutral-200/40 bg-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
@@ -33,13 +33,11 @@ export default function Navigation() {
           className="relative z-10 transition-opacity duration-300 hover:opacity-70"
         >
           <Image
-            src="/ANFILOV-Logo.svg"
+            src={scrolled ? "/ANFILOV-Logo.svg" : "/ANFILOV-Logo-White.svg"}
             alt="ANFILOV"
             width={140}
             height={36}
-            className={`h-7 w-auto transition-all duration-700 ${
-              scrolled ? "" : "brightness-0 invert"
-            }`}
+            className="h-7 w-auto"
             priority
           />
         </a>
@@ -89,13 +87,13 @@ export default function Navigation() {
 
       {/* Mobile menu */}
       <div
-        className={`transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+        className={`mobile-menu-transition md:hidden ${
           menuOpen
             ? "max-h-64 opacity-100"
             : "max-h-0 opacity-0 pointer-events-none"
         } overflow-hidden`}
       >
-        <div className="border-t border-neutral-200/30 bg-white/95 px-8 pb-6 pt-2 backdrop-blur-2xl">
+        <div className="border-t border-neutral-200/30 bg-white/95 px-8 pb-6 pt-2 backdrop-blur-xl">
           {links.map((link, i) => (
             <a
               key={link.href}
