@@ -7,6 +7,7 @@ import HeroBackground from "./components/HeroBackground";
 import MarqueeStrip from "./components/MarqueeStrip";
 import AnimatedNumber from "./components/AnimatedNumber";
 import GoldOrb from "./components/GoldOrb";
+import ContactForm from "./components/ContactForm";
 
 interface LandingPageSkeleton {
   contentTypeId: "landingpage";
@@ -324,7 +325,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── CTA SECTION ─────────────────────── */}
+      {/* ── KONTAKT / FORMULÁŘ ────────────────── */}
       <section className="relative overflow-hidden bg-neutral-900 py-32">
         <div
           className="pointer-events-none absolute inset-0"
@@ -347,11 +348,10 @@ export default async function Home() {
             <p className="mx-auto mt-6 max-w-md text-[15px] leading-[1.7] text-white/35">
               Ozvěte se. Probereme, co potřebujete, a navrhneme řešení.
             </p>
-            <div className="mt-12">
-              <a href="mailto:info@anfilov.cz" className="btn-primary text-[15px]" style={{ color: "#1A1A1A" }}>
-                Napište nám
-              </a>
-            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={150}>
+            <ContactForm />
           </ScrollReveal>
         </div>
       </section>
