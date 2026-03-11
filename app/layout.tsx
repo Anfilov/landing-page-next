@@ -15,6 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "ANFILOV — Od strategie po design",
   description: "Grafické design & branding studio. Tvoříme vizuální identity, logotypy, tiskoviny a komunikační systémy.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

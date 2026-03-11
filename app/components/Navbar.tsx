@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export default function Navigation() {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -14,10 +17,16 @@ export default function Navigation() {
   }, []);
 
   const links = [
-    { href: "#sluzby", label: "Služby" },
-    { href: "#o-nas", label: "O nás" },
-    { href: "#kontakt", label: "Kontakt" },
+    { href: "/", label: "Domů" },
+    { href: "/o-projektu", label: "O projektu" },
+    { href: "/#kontakt", label: "Kontakt" },
   ];
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav
@@ -28,8 +37,8 @@ export default function Navigation() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6 lg:px-12">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="relative z-10 transition-opacity duration-300 hover:opacity-70"
         >
           <Image
@@ -41,23 +50,30 @@ export default function Navigation() {
             className="h-7 w-auto"
             priority
           />
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden items-center gap-12 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`nav-link text-[11px] font-medium uppercase tracking-[0.2em] transition-colors duration-500 ${
-                scrolled
-                  ? "text-neutral-400 hover:text-neutral-800"
-                  : "text-white/50 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link text-[11px] font-medium uppercase tracking-[0.2em] transition-colors duration-500 ${
+                  active
+                    ? scrolled
+                      ? "text-gold-500"
+                      : "text-gold-400"
+                    : scrolled
+                      ? "text-neutral-400 hover:text-neutral-800"
+                      : "text-white/50 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Hamburger */}
@@ -95,23 +111,28 @@ export default function Navigation() {
         } overflow-hidden`}
       >
         <div className="border-t border-neutral-200/30 bg-white/95 px-8 pb-6 pt-2 backdrop-blur-xl">
-          {links.map((link, i) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="block py-3.5 text-[12px] font-medium uppercase tracking-[0.15em] text-neutral-500 transition-colors duration-300 hover:text-neutral-800"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
-                opacity: menuOpen ? 1 : 0,
-                transform: menuOpen ? "translateX(0)" : "translateX(-8px)",
-                transition:
-                  "opacity 0.3s ease, transform 0.3s ease, color 0.3s ease",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link, i) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`block py-3.5 text-[12px] font-medium uppercase tracking-[0.15em] transition-colors duration-300 hover:text-neutral-800 ${
+                  active ? "text-gold-500" : "text-neutral-500"
+                }`}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
+                  opacity: menuOpen ? 1 : 0,
+                  transform: menuOpen ? "translateX(0)" : "translateX(-8px)",
+                  transition:
+                    "opacity 0.3s ease, transform 0.3s ease, color 0.3s ease",
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>

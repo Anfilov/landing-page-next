@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 
-export default function ContactForm() {
+function ContactFormFields() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -49,7 +49,6 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="mx-auto mt-12 max-w-lg text-left">
       <div className="space-y-5">
-        {/* Jméno */}
         <div>
           <label
             htmlFor="name"
@@ -68,7 +67,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Email */}
         <div>
           <label
             htmlFor="email"
@@ -87,7 +85,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Zpráva */}
         <div>
           <label
             htmlFor="message"
@@ -107,7 +104,6 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Submit */}
       <div className="mt-8 text-center">
         <button
           type="submit"
@@ -125,5 +121,39 @@ export default function ContactForm() {
         </p>
       )}
     </form>
+  );
+}
+
+interface ContactFormProps {
+  label: string;
+  heading: string;
+  description: string;
+}
+
+export default function ContactForm({ label, heading, description }: ContactFormProps) {
+  return (
+    <section id="kontakt" className="relative overflow-hidden bg-neutral-900 py-32">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 40% 50% at 50% 50%, rgba(214,189,104,0.08) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-4xl px-8 text-center lg:px-12">
+        <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold-400/50">
+          {label}
+        </p>
+        <h2 className="mt-6 text-[clamp(28px,4vw,44px)] font-semibold leading-[1.2] tracking-tight text-white">
+          {heading}
+        </h2>
+        <p className="mx-auto mt-6 max-w-md text-[15px] leading-[1.7] text-white/35">
+          {description}
+        </p>
+
+        <ContactFormFields />
+      </div>
+    </section>
   );
 }

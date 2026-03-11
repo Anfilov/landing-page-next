@@ -1,4 +1,4 @@
-import Navigation from "../components/Navigation";
+import Navigation from "../components/Navbar";
 import ScrollReveal from "../components/ScrollReveal";
 
 export default function OProjektu() {
